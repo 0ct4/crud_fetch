@@ -88,8 +88,8 @@ Ingeniería Web - II Semestre 2025
 Instructor: Ing. Irina Fong
 
 👥 Autores
-- Frauca, Octavio
-- Carrion, Arelys
+- Frauca, Octavio 8-1010-1989
+- Carrion, Arelys 8-994-1678
 
 📝 Notas del Trabajo
 - Desarrollado como práctica de laboratorio
