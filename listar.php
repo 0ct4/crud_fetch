@@ -10,12 +10,12 @@ if ($data != "") {
 $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
 foreach ($resultado as $data) {
     echo "<tr>
-            <td>" . $data['id'] . "</td>
-            <td>" . $data['codigo'] . "</td>
-            <td>" . $data['producto'] . "</td>
-            <td>" . $data['precio'] . "</td>
-            <td>" . $data['cantidad'] . "</td>
-            <td>
+            <td data-label='ID'>" . $data['id'] . "</td>
+            <td data-label='Código'>" . $data['codigo'] . "</td>
+            <td data-label='Descripción'>" . $data['producto'] . "</td>
+            <td data-label='Precio'>" . $data['precio'] . "</td>
+            <td data-label='Cantidad'>" . $data['cantidad'] . "</td>
+            <td data-label='Acciones'>
                 <button type='button' class='btn btn-success' onclick=Editar('" . $data['id'] . "')>Editar</button>
             </td>        
         </tr>";

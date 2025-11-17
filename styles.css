@@ -1,0 +1,121 @@
+/* Global responsive stylesheet for CRUD app */
+:root{
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --primary: #2b7cff;
+  --primary-600: #1f61d6;
+  --muted: #6b7280;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --border: #e6e9ef;
+  --radius: 8px;
+  --max-width: 1100px;
+}
+
+/* Base resets */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:16px;
+}
+
+/* Layout container */
+.container{
+  width:100%;
+  max-width:var(--max-width);
+  margin:28px auto;
+  padding:0 16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:0 1px 2px rgba(16,24,40,0.03);
+}
+
+/* Header */
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.app-title{font-size:1.25rem;font-weight:600}
+.app-sub{color:var(--muted);font-size:.95rem}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:8px;border:1px solid transparent;
+  background:var(--primary);color:#fff;text-decoration:none;cursor:pointer;font-weight:600;
+}
+.btn.secondary{background:transparent;color:var(--primary);border-color:var(--border);font-weight:600}
+.btn.danger{background:var(--danger)}
+.btn.small{padding:6px 8px;font-size:.9rem;border-radius:6px}
+
+/* Forms */
+label{display:block;margin-bottom:6px;font-size:.95rem;color:var(--muted)}
+.form-row{display:flex;gap:12px;flex-wrap:wrap}
+.form-group{flex:1;min-width:180px}
+input[type=text],input[type=email],input[type=number],select,textarea{
+  width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:1rem
+}
+textarea{min-height:100px}
+
+/* Table */
+.table-wrapper{overflow:auto;border-radius:8px}
+table{width:100%;border-collapse:collapse;background:var(--card)}
+thead{background:#fbfbff}
+th,td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left}
+th{font-weight:600;color:var(--muted);font-size:.95rem}
+tr:last-child td{border-bottom:0}
+
+/* Responsive table stack on small screens */
+@media (max-width:720px){
+  .form-row{flex-direction:column}
+  table,thead,tbody,tr,th,td{display:block}
+  thead{display:none}
+  tr{margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:8px}
+  td{position:relative;padding-left:50%;white-space:normal}
+  td:before{position:absolute;left:12px;top:12px;font-weight:600;color:var(--muted);width:36%;display:inline-block}
+  /* Add content labels via data-* attributes in server markup for best results */
+}
+
+/* Utilities */
+.muted{color:var(--muted)}
+.text-right{text-align:right}
+.flex{display:flex;gap:12px;align-items:center}
+.stack{display:flex;flex-direction:column;gap:8px}
+.spacer{flex:1}
+
+/* Small screens adjustments */
+@media (max-width:480px){
+  :root{--radius:6px}
+  .container{margin:18px auto;padding:0 12px}
+  .app-title{font-size:1.05rem}
+}
+
+/* Accessibility helpers */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* Helpful classes for CRUD forms */
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.notice{padding:10px;border-radius:8px;background:#f1fdf6;border:1px solid rgba(22,163,74,0.12);color:var(--success)}
+
+/* Print-friendly */
+@media print{
+  body{background:#fff;color:#000}
+  .btn{display:none}
+}
+
+/* End of styles */

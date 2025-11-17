@@ -1,0 +1,6 @@
+Link del repositorio en github
+
+https://github.com/0ct4/crud_fetch.git
+
+Arelys Carrión 8-994-1678
+Octavio Frauca 8-1010-1989
