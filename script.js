@@ -1,58 +1,59 @@
 ListarProductos();
+
 function ListarProductos(busqueda) {
     const init = { method: "POST" };
     if (typeof busqueda !== 'undefined' && busqueda !== null) init.body = busqueda;
-    fetch("listar.php", init)
-        .then(response => response.text())
-        .then(response => {
-            resultado.innerHTML = response;
-        })
+    fetch("controlador.php", {
+        method: "POST",
+        body: new FormData(new FormData(document.createElement('form')).append('accion', 'listar')) || 'accion=listar'
+    }).then(response => response.text())
+        .then(response => resultado.innerHTML = response);
 }
-// función para registrar
+
+// Registrar nuevo o editar existente
 registrar.addEventListener("click", () => {
-    fetch("registrar.php", {
+    const formData = new FormData(frm);
+    formData.append('accion', idp.value ? 'editar' : 'registrar');
+    
+    fetch("controlador.php", {
         method: "POST",
-        body: new FormData(frm)
-    }).then(response => response.text()).then(response => {
-        // Uso del switch
-        let title = '';
-        switch (response) {
-            case 'ok':
-                title = 'Registrado';
-                break;
-            case 'modificado':
-                title = 'Modificado';
-                break;
-            default:
-                title = response;
-        }
-        Swal.fire({
-            icon: 'success',
-            title: title,
-            showConfirmButton: false,
-            timer: 1500
-        })
-        registrar.value = "Registrar";
-        idp.value = "";
-        ListarProductos();
-        frm.reset();
-    })
+        body: formData
+    }).then(response => response.json())
+        .then(response => {
+            Swal.fire({
+                icon: 'success',
+                title: response.mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            registrar.value = "Registrar";
+            idp.value = "";
+            ListarProductos();
+            frm.reset();
+        });
 });
-// función para editar
+
+// Editar producto
 function Editar(id) {
-    fetch("editar.php", {
+    const formData = new FormData();
+    formData.append('accion', 'obtener');
+    formData.append('id', id);
+    
+    fetch("controlador.php", {
         method: "POST",
-        body: id
-    }).then(response => response.json()).then(response => {
-        idp.value = response.id;
-        codigo.value = response.codigo;
-        producto.value = response.producto;
-        precio.value = response.precio;
-        cantidad.value = response.cantidad;
-        registrar.value = "Actualizar"
-    })
+        body: formData
+    }).then(response => response.json())
+        .then(response => {
+            idp.value = response.id;
+            codigo.value = response.codigo;
+            producto.value = response.producto;
+            precio.value = response.precio;
+            cantidad.value = response.cantidad;
+            registrar.value = "Actualizar";
+        });
 }
-// función para buscar
+
+// Buscar productos
 buscar.addEventListener("keyup", () => {
     const valor = buscar.value.trim();
     ListarProductos(valor === "" ? undefined : valor);
